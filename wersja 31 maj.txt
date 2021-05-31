@@ -35,7 +35,7 @@ for (let activeLink of activeLinks) {
 }
 
 function generateTitleLinks() {
-  /* remove title list from left column */
+   /* remove title list from left column */
   const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
   console.log('titleList: remove title list from left column');
@@ -51,13 +51,13 @@ function generateTitleLinks() {
     console.log('articleId')
 
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
-    /* create HTMl link and save it as const */
+     /* create HTMl link and save it as const */
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
     console.log('linkHTML');
     /* insert HTML code to title list at left column*/
     titleList.innerHTML = titleList.innerHTML + linkHTML;
     console.log(titleList);
-  }
+   }
   const activeLinks = document.querySelectorAll('.titles a');
   console.log('Wyświetlono links: :, links');
   for (let activeLink of activeLinks) {
@@ -76,41 +76,36 @@ function generateTags() {
 }
 /* START LOOP: for every article: */
 for (let article of articles) {
+  console.log(article);
 
   /* find tags wrapper */
-  const tagsList = article.querySelector(optArticleTagsSelector);
-  console.log('tagsList: ', tagsList);
+  const titleList = article.querySelector(optArticleTagsSelector);
+  console.log(titleList);
 
   /* make html variable with empty string */
   let html = '';
   /* get tags from data-tags attribute */
   const articleTags = article.getAttribute('data-tags');
-  console.log('articleTags');
-
+  console.log(articleTags);
   /* split tags into array */
   const articleTagsArray = articleTags.split(' ');
-  console.log('articleTagsArray');
-
+  console.log(articleTagsArray);
   /* START LOOP: for each tag */
   for (let tag of articleTagsArray) {
     console.log('Generate tags:', tag);
-
     /* generate HTML of the link */
-    function generateLinkHTML() {
-      const LinkHtml = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>' + '       ';
-      console.log('LinkHtml');
-
-      /* const LinkHtml = document.querySelector(optTitleListSelector); */
-      titleList.innerHTML = '';
+    function generateLinkHTML(){
+      const LinkHtml = document.querySelector(optTitleListSelector);
+  titleList.innerHTML = '';
     }
     /* add generated code to html variable */
-    html = html + LinkHTML;
-    console.log('html');
-    /* END LOOP: for each tag */
   }
-  /* insert HTML of all the links into the tags wrapper */
-  tagsList.insertAdjectHTML('afterBegin', html);
-  /* END LOOP: for every article: */
+  /* END LOOP: for each tag */
 }
+/* insert HTML of all the links into the tags wrapper */
+
+/* END LOOP: for every article: */
+
+
 generateTags();
 
