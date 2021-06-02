@@ -109,3 +109,6 @@ for (let article of articles) {
 
 generateTags();
 
+
+
+= '<li><a href="#tag-' + tag + '">' + tag + '</a></li>' + '       ';
