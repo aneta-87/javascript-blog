@@ -37,7 +37,8 @@ const titleClickHandler = function (event) {
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector =
 
 /* Function generateTitleLinks */
 function generateTitleLinks(customSelector = '') {
@@ -80,7 +81,6 @@ for (let link of links) {
 
 generateTitleLinks();
 
-
 /* Function generateTags */
 function generateTags() {
 
@@ -109,7 +109,7 @@ function generateTags() {
       const linkHTML = '<li><a href="#tag' + tag + '"><span>' + tag + '</span></a></li>';
 
       /* add generated code to html variable */
-      html += linkHTML + ' ';
+      html = html + linkHTML;
       /* END LOOP: for each tag */
     }
     /* insert HTML of all the links into the tags wrapper */
@@ -186,3 +186,42 @@ tagLink.addEventListener('click', tagClickHandler);
 }
 
 addClickListenersToTags();
+
+/* Function generateAuthors */
+function generateAuthors() {
+  console.log(generateAuthors);
+
+ /* find all articles */
+ const articles = document.querySelectorAll('optArticleSelector');
+
+ /* START LOOP: for every article: */
+ for (let article of articles) {
+
+   /* find tags wrapper */
+   const authorsWrapper = article.querySelector(optArticleAuthorSelector);
+   console.log(authorsWrapper);
+
+   /* make html variable with empty string */
+   let html = '';
+
+   /* get authors from data-authors */
+   const articleAuthors = article.getAttribute('data-author');
+   console.log(articleAuthors);
+
+     /* generate HTML of the link */
+     const linkHTML = '<li><a href="#author' + articleAuthors + '"><span>' + articleAuthors + '</span></a></li>';
+
+     /* add generated code to html variable */
+     html = html + linkHTML;
+     console.log(linkHTML);
+     /* END LOOP: for each tag */
+   }
+   /* insert HTML of all the links into the tags wrapper */
+   tagsWrapper.innerHTML = html;
+   /* END LOOP: for every article: */
+ }
+}
+generateAuthors();
+
+
+  }
