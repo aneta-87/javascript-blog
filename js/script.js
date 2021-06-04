@@ -107,6 +107,7 @@ function generateTags() {
 
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#tag-' + '">' + tag + '</a></li>';
+      console.log('link HTML of the Link');
 
       /* add generated code to html variable */
       html += linkHTML + ' ';
@@ -199,6 +200,7 @@ function generateAuthors() {
   const articles = document.querySelectorAll(optArticleSelector);
 
   /* START LOOP: for every article: */
+  console.log('tag was clicked');
   for (let article of articles) {
 
     /* find authors wrapper */
@@ -221,10 +223,48 @@ function generateAuthors() {
 
     /* END LOOP: for each tag */
 
-    /* insert HTML to the authorsWrapper */
-    authorsWrapper.innerHTML = html;
+  /* insert HTML to the authorsWrapper */
+  authorsWrapper.innerHTML = html;
 
-    /* END LOOP: for every article: */
+  /* END LOOP: for every article: */
   }
 }
 generateAuthors();
+
+/* Dodajemy akcję po kliknięciu w author */
+const authorClickHandler = function (event) {
+  event.preventDefault();
+  const clickedElement = this;
+  const href = clickedElement.getAttribute('href');
+  const author = href.replace('#author-', '');
+  const activeAuthorLinks = document.querySelectorAll('a[href^="#author-"]');
+
+  for (let activeAuthorLink of activeAuthorLinks) {
+    activeAuthorLink.classList.remove('active');
+  }
+  const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+  for (let authorLink of authorLinks) {
+    author.classList.add('active');
+  }
+  generateTitleLinks('[data-author="' + author + '"]');
+};
+
+
+const addClickListenersToAuthors = function () {
+  console.log(addClickListenersToAuthors);
+
+  /* find all links to Authors */
+  const authorLinks = document.querySelectorAll('.post-author');
+
+  /* START LOOP: for each link */
+  for (let authorLink of authorLinks) {
+
+    /* add authorClickHandler as event listener for that link */
+    authorLink.addEventListener('click', authorClickHandler);
+
+    /* END LOOP: for each link */
+  }
+}
+addClickListenersToAuthors();
+
+
