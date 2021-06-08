@@ -118,3 +118,34 @@ body {
     margin: 0 10px 0 0;
   }
 }
+.tags li {
+  display: inline-block;
+  margin: 0 5px;
+}
+.tag-size-1 {
+  font-size: 30px;
+  color: green;
+}
+.tag-size-2 {
+  font-size: 40px;
+  color: orange;
+}
+.tag-size-3 {
+  font-size: 50px;
+  color: red;
+}
+.tag-size-7 {
+  font-size: 55px;
+  color: purple
+}
+.tag-size-5 {
+  font-size: 60px;
+  color: pink;
+}
+.list {
+  list-style-type: none;
+    a {
+      text-decoration: none;
+    }
+}
+
