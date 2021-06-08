@@ -96,9 +96,25 @@ body {
 .authors {
   li {
     margin-bottom: 12px;
+    display: inline-block;
+    margin: 0 5px;
   }
 }
-
+.author-size-1 {
+  font-size: 20px;
+}
+.author-size-1 {
+  font-size: 30px;
+}
+.author-size-1 {
+  font-size: 40px;
+}
+.author-size-1 {
+  font-size: 50px;
+}
+.author-size-1 {
+  font-size: 60px;
+}
 /* Post */
 
 .post {
@@ -130,16 +146,16 @@ body {
   font-size: 40px;
   color: orange;
 }
-.tag-size-3 {
-  font-size: 50px;
+.tag-size-10 {
+  font-size: 45px;
   color: red;
 }
-.tag-size-7 {
-  font-size: 55px;
+.tag-size-9 {
+  font-size: 45px;
   color: purple
 }
 .tag-size-5 {
-  font-size: 60px;
+  font-size: 55px;
   color: pink;
 }
 .list {

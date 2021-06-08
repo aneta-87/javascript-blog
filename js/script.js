@@ -41,7 +41,10 @@ const optArticleSelector = '.post',
   optArticleAuthorSelector = '.post-author',
   optTagsListSelector = '.tags.list',
   optCloudClassCount = 5,
-  optCloudClassPrefix = 'tag-size-';
+  optCloudClassPrefix = 'tag-size-',
+  optAuthorsListSelector = '.authors.list',
+  optAuthorsClassCount = 5,
+  optAuthorsClassPrefix = 'author-size-';
 
 /* Function generateTitleLinks */
 function generateTitleLinks(customSelector = '') {
@@ -259,9 +262,44 @@ function addClickListenersToTags() {
 
 addClickListenersToTags();
 
+
+/* Function calculateAuthorParams */
+function calculateAuthorsParams(authors) {
+  const params = {
+    min: 999999,
+    max: 0,
+  }
+  console.log(params);
+
+  for (let author in authors) {
+    console.log(author + ' is used ' + authors[author] + ' times');
+    params.max = tags[tag];
+
+    if (authors[author] > params.max) {
+      params.max = authors[author];
+    }
+    if (authors[author] < params.min) {
+      params.min = authors[author];
+    }
+  }
+  return params;
+}
+
+/* Function calculateAuthorClass */
+function calculateAuthorClass(count, params) {
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor(percentage * (optAuthorClassCount - 1) + 1);
+  return optAuthorClassPrefix + classNumber;
+}
+
 /* Function generateAuthors */
 function generateAuthors() {
   console.log(generateAuthors);
+
+  /* [NEW] create a new variable allAuthors with an empty object */
+  let allAuthors = {};
 
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
@@ -284,6 +322,15 @@ function generateAuthors() {
 
     /* add generated code to html variable */
     html = html + linkHTML;
+
+    /* [NEW] check if this link is NOT already in allTags */
+    if (!allAuthors[articleAuthors]) {
+
+      /* [NEW] add tag to allTags object */
+      allAuthors[articleAuthors] = 1;
+    } else {
+      allAuthors[articleAuthors]++;
+    }
 
     /* END LOOP: for each tag */
 
@@ -311,7 +358,7 @@ const authorClickHandler = function (event) {
     author.classList.add('active');
   }
   generateTitleLinks('[data-author="' + author + '"]');
-};
+}
 
 
 const addClickListenersToAuthors = function () {
