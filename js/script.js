@@ -56,6 +56,7 @@ function generateTitleLinks(customSelector = '') {
   /* for each article */
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
   let html = '';
+  console.log(optArticleSelector + customSelector);
   for (let article of articles) {
 
     /* get the article id */
@@ -83,14 +84,15 @@ generateTitleLinks();
 /* Function calculateTagsParams */
 function calculateTagsParams(tags) {
   const params = {
-    min: 999999,
-    max: 0,
+    min: 1,
+    max: 5,
   }
   console.log(params);
 
   for (let tag in tags) {
     console.log(tag + ' is used ' + tags[tag] + ' times');
-    params.max = tags[tag];
+    params.max = Math.max(tags[tag], params.max);
+    params.min = Math.min(tags[tag], params.min);
 
     if (tags[tag] > params.max) {
       params.max = tags[tag];
@@ -175,7 +177,7 @@ function generateTags() {
   for (let tag in allTags) {
 
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + '" href="#tag-' + tag + '">' + tag + '</a></li>';
+    const tagLinkHTML = '<li><a class="' + calculateTagClass(allTags[tag], tagsParams) + ' " href="#tag-' + tag + '">' + tag + '</a></li>';
     console.log('tagLinkHTML');
     allTagsHTML += tagLinkHTML;
 
@@ -203,7 +205,7 @@ function tagClickHandler(event) {
 
   /* make a new constant "tag" and extract tag from the "href" constant */
   const tag = href.replace('#tag-', '');
-
+  console.log(tag);
   /* find all tag links with class active */
   const activeTags = document.querySelectorAll('a.active[href^="#tag-"]');
 
@@ -231,7 +233,7 @@ function tagClickHandler(event) {
   }
 
   /* execute function "generateTitleLinks" with article selector as argument */
-  generateTitleLinks('[data-tags~="' + tag + ' "]');
+  generateTitleLinks('[data-tags~="' + tag + '"]');
 }
 function addClickListenersToTags() {
   console.log(addClickListenersToTags);
@@ -254,8 +256,8 @@ addClickListenersToTags();
 /* Function calculateAuthorParams */
 function calculateAuthorsParams(authors) {
   const params = {
-    min: 999999,
-    max: 0,
+    min: 1,
+    max: 5,
   }
   console.log(params);
 
@@ -332,7 +334,7 @@ function generateAuthors() {
   for (let articleAuthor in allAuthors) {
 
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    const authorLinkHTML = calculateAuthorsClass(allAuthors[articleAuthor], authorsParams);
+    const authorLinkHTML = calculateAuthorClass(allAuthors[articleAuthor], authorsParams);
     console.log('authorLinkHTML:', authorLinkHTML);
 
     allAuthorsHTML += '<li><a href="#author-' + articleAuthor + '" class ="' + authorLinkHTML + '">' + articleAuthor + '</a> ' + allAuthors[articleAuthor] + '</li>';
